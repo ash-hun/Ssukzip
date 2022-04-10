@@ -1,15 +1,40 @@
-from typing import Optional
+from typing import List
 
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, HTTPException
+from pydantic import BaseModel
+from typing import Optional
+from sqlalchemy.orm import Session, sessionmaker
+
+import sqlalchemy.orm.session
+
+import models
+import database
+import schemas
+import crud
+
+
+models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI()
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+# Dependency
+def get_db():
+    db = database.SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
+"""
+@app.post("/users",response_model=schemas.User)
+def create_user2(user:schemas.UserCreate, db: Session = Depends(get_db)): # 무조건 typing을 해줘야 에러가 발생하지 않음
+    db_user = crud.get_user_by_email(db, email=user.email)
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+    if db_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    return crud.create_user(db=db, user=user)
+
+@app.get("/user/{user_email}", response_model=schemas.User)
+def get_user(user_email: str, db: Session = Depends(get_db)):
+    return crud.get_user_by_email(db=db,email=user_email) """
