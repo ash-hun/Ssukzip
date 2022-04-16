@@ -11,6 +11,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-navigation/drawer": "^6.4.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.1",
     "expo": "~44.0.0",
@@ -20,7 +21,8 @@
     "react-native": "0.64.3",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "^3.13.1",
-    "react-native-web": "0.17.1"
+    "react-native-web": "0.17.1",
+    "zustand": "^3.7.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

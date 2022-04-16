@@ -4,8 +4,10 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@screens/*": ["screens/*"],
+      "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
+      "@screens/*": ["screens/*"],
     }
   }
 }
