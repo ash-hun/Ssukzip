@@ -1,11 +1,13 @@
 from typing import List
-
 from fastapi import Depends, FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 from sqlalchemy.orm import Session, sessionmaker
 
 import sqlalchemy.orm.session
+import requests
+import jwt
+import json
 
 import models
 import database
@@ -25,6 +27,28 @@ def get_db():
         yield db
     finally:
         db.close()
+
+#oauth
+@app.get('/auth/google')
+async def google_auth(code: str):
+    code = parse.urlparse(code)
+    print(code.path)
+    url = "https://oauth2.googleapis.com/token"
+    data={
+    'code': code.path,
+    'client_id':'',
+    'client_secret': '',
+    'redirect_uri':'',
+    'grant_type':''
+    }
+
+    resp = request.post(url, data=data)
+    token = {'token' : resp.json()['id_token']}
+    print(token)
+#     profile = jwt.decode(token,options={"verify_signature": False})
+    return JSONResponse(content=token)
+
+
 
 """
 @app.post("/users",response_model=schemas.User)

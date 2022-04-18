@@ -13,6 +13,7 @@ class User(Base):
     name = Column(Enum)
     img_url = Column(String(100))
     reviews = relationship("review", back_populates="parents")
+    token = Column(Text)
 
 #     is_active = Column(Boolean, default=True)
 
