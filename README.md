@@ -44,3 +44,14 @@
 [썩집 1차 회의(2022 - 03 - 22)](https://topaz-joke-66e.notion.site/1-2022-03-22-ccb37b4a0a704fe6a27a4541411cde6a)
 
 [썩집 2차 회의(2022 - 03 - 29)](https://topaz-joke-66e.notion.site/2-2022-03-29-26e127c48f0147daa2cb0b473f6e8342)
+
+[썩집 3차 회의(2022 - 04 - 05)](https://topaz-joke-66e.notion.site/3-2022-04-05-c074945a8b774091ae0e9c28379215eb)
+
+[썩집 4차 회의(2022 - 04 - 12)](https://topaz-joke-66e.notion.site/4-2022-04-12-9d145a134929471e85ed4b5bc4d070a9)
+
+[썩집 5차 회의(2022 - 04 - 17)](https://topaz-joke-66e.notion.site/5-2022-04-17-d6c6d0f471c74462a47c41e27e182b8c)
+
+[썩집 6차 회의(2022 - 04 - 27)](https://topaz-joke-66e.notion.site/6-2022-04-27-665549dd3f864bc0922baa1d1406f6ed)
+
+[썩집 7차 회의(2022 - 05 - 03)](https://topaz-joke-66e.notion.site/7-2022-05-03-b8e1d7d3ca864fb69397a0baf45ad1f9)
+
