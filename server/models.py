@@ -10,9 +10,9 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String(20), unique=True, index=True)
     name = Column(String(20))
-    name = Column(Enum)
+    nickname = Column(String(20))
     img_url = Column(String(100))
-    reviews = relationship("review", back_populates="parents")
+    reviews = relationship("Review", primaryjoin="User.id == Review.user_id")
     token = Column(Text)
 
 #     is_active = Column(Boolean, default=True)
@@ -22,8 +22,8 @@ class Review(Base):
     __tablename__="review"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = relationship("user", back_populates="child")
-    market_id = relationship("market", back_populates="child")
+    user_id = Column(Integer,ForeignKey('user.id'))
+    market_id = Column(Integer,ForeignKey('market.id'))
     rate = Column(Integer)
     comment = Column(Text)
     solution = Column(Text)
@@ -36,4 +36,4 @@ class Market(Base):
     market_latitude = Column(Float)
     market_longitude = Column(Float)
     phone = Column(String(12))
-    review = relationship("review",back_populates="parents")
+    review = relationship("Review", primaryjoin="Market.id == Review.market_id")

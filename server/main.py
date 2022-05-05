@@ -9,16 +9,13 @@ import requests
 import jwt
 import json
 
-import models
-import database
-import schemas
-import crud
+import models, database, schemas, crud
+from router import oauth
 
 
 models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI()
-
 
 # Dependency
 def get_db():
@@ -28,26 +25,7 @@ def get_db():
     finally:
         db.close()
 
-#oauth
-@app.get('/auth/google')
-async def google_auth(code: str):
-    code = parse.urlparse(code)
-    print(code.path)
-    url = "https://oauth2.googleapis.com/token"
-    data={
-    'code': code.path,
-    'client_id':'',
-    'client_secret': '',
-    'redirect_uri':'',
-    'grant_type':''
-    }
-
-    resp = request.post(url, data=data)
-    token = {'token' : resp.json()['id_token']}
-    print(token)
-#     profile = jwt.decode(token,options={"verify_signature": False})
-    return JSONResponse(content=token)
-
+app.include_router(oauth.router)
 
 
 """
