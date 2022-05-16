@@ -3,34 +3,54 @@ import models, schemas
 import database
 
 
-def create_user(db: Session, user: schemas.UserCreate):
-
-    db_user = models.User(email=user.email, name=user.name, nickname= user.nickname, token = user.token, img_url = user.img_url)
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-    return db_user
-
+def create_user(db: Session, user: schemas.User):
+    try:
+        db_user = models.User(email=user.email, name=user.name, nickname= user.nickname, token = user.token, img_url = user.img_url)
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+        return {'msg': "추가되었습니다."}
+    except Exception as e:
+        return {'msg': e}
 def get_user(db: Session, user_id: int):
-    return db.query(models.User).filter(models.User.id == user_id).first()
+   try:
+        user = db.query(models.User).filter(models.User.id == User_id).first()
+        if(user):
+            return user
+        else:
+            return {'msg': "해당 유저는 존재하지 않습니다."}
+   except Exception as e:
+        return {'msg': e}
 
 
 def get_user_by_email(db: Session, email: str):
-    return db.query(models.User).filter(models.User.email == email).first()
+    try:
+        user = db.query(models.User).filter(models.User.email == email).first()
+        if(user):
+            return user
+        else:
+            return {'msg': "해당 유저는 존재하지 않습니다."}
+    except Exception as e:
+        return {'msg': e}
 
 
 def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
 
 def update_user_token(db: Session, email:str, token: str):
-    user_update = db.query(models.User).filter_by(email = email).first()
-    user_update.token = token
-    db.add(user_update)
-    db.commit()
+    try:
+        user_update = db.query(models.User).filter_by(email = email).first()
+        if(user_update):
+            user_update.token = token
+            db.add(user_update)
+            db.commit()
+        else:
+            return {'msg': "해당 유저는 존재하지 않습니다."}
+    except Exception as e:
+        return {'msg': e}
 
 def delete_user(db: Session, email: str):
     try:
-
         user = db.query(models.User).filter_by(email=email).first()
         if(user):
             db.delete(user)

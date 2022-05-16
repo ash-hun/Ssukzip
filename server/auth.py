@@ -8,10 +8,9 @@ import models, schemas
 import database, requests
 
 config = Config('.env')
-
 #구글 토큰 얻어오기
 def get_google_token(code:str):
-
+    print(config)
     url = "https://oauth2.googleapis.com/token"
     data={
     'code': code,
@@ -66,12 +65,12 @@ def generate_token(user_email :str):
     }
     print("jwt 토큰 생성 완료")
     return{
-        'access_token': encode(token,'secret')
+        'access_token': encode(token,'secrett')
     }
 
 def verify_jwttoken(token:str):
 
-    token_info = decode(token, key='secret', algorithms='HS256')
+    token_info = decode(token, key='secrett', algorithms='HS256')
 
     now = int(datetime.now().timestamp())
     print(token_info['exp'])

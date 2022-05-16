@@ -1,19 +1,24 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from pydantic import BaseModel # 객체 타입설정
 
-class UserBase(BaseModel):
-    email: str
 
+class User(BaseModel):
+    email: str = None
+    name: str= None
+    nickname: str= None
+    img_url: str= None
+    token: str= None
 
-class UserCreate(UserBase):
-    password: str
+class Review(BaseModel):
+    user_id: int= None
+    market_id: int= None
+    rate: int= None
+    comment : str= None
+    solution : str= None
 
-
-class User(UserBase):
-    id: int
-    is_active: bool
-
-
-    class Config:
-        orm_mode = True
+class Market(BaseModel):
+    market_name: str= None
+    market_latitude : float= None
+    market_longitude : float= None
+    phone : str= None

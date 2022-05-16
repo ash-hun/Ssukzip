@@ -10,7 +10,7 @@ import jwt
 import json
 
 import models, database, schemas, crud
-from router import oauth
+from router import oauth,review,market
 
 
 models.Base.metadata.create_all(bind=database.engine)
@@ -26,6 +26,8 @@ def get_db():
         db.close()
 
 app.include_router(oauth.router)
+app.include_router(review.router)
+app.include_router(market.router)
 
 
 """
