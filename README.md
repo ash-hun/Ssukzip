@@ -55,3 +55,6 @@
 
 [썩집 7차 회의(2022 - 05 - 03)](https://topaz-joke-66e.notion.site/7-2022-05-03-b8e1d7d3ca864fb69397a0baf45ad1f9)
 
+[썩집 8차 회의(2022 - 05 - 10)](https://topaz-joke-66e.notion.site/8-2022-05-10-0f3b9267e0734c20ba8579082bf3429e)
+
+
