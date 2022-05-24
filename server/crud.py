@@ -3,6 +3,7 @@ import models, schemas
 import database
 
 
+
 def create_user(db: Session, user: schemas.User):
     try:
         db_user = models.User(email=user.email, name=user.name, nickname= user.nickname, token = user.token, img_url = user.img_url)

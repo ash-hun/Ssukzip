@@ -69,13 +69,15 @@ def generate_token(user_email :str):
     }
 
 def verify_jwttoken(token:str):
+    try:
+        token_info = decode(token, key='secrett', algorithms='HS256')
 
-    token_info = decode(token, key='secrett', algorithms='HS256')
-
-    now = int(datetime.now().timestamp())
-    print(token_info['exp'])
-    if(token_info['exp'] < now):
-        print('로그아웃 되었습니다.')
+        now = int(datetime.now().timestamp())
+        print(token_info['exp'])
+        if(token_info['exp'] < now):
+            print('로그아웃 되었습니다.')
+            return False;
+        else:
+            return token_info['user_email']
+    except Exception as e:
         return False;
-    else:
-        return token_info['user_email']
