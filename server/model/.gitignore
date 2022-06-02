@@ -1,2 +1,10 @@
-dataset/
 .idea/
+__pycache__/
+
+ratings.txt
+ratings_train.txt
+ratings_test.txt
+test_docs.json
+train_docs.json
+
+myModel.h5
