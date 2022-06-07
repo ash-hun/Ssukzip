@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -12,7 +13,13 @@ class LoginScreen extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/map');
+                  Navigator.pushNamed(
+                      context,
+                      '/map',
+                    arguments: [
+                      "test"
+                    ]
+                  );
                 },
                 child: const Text('Sign in with Google'),
               ),
@@ -29,5 +36,26 @@ class LoginScreen extends StatelessWidget {
           )
       ),
     );
+  }
+
+  _checkPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        debugPrint('Location permissions are denied');
+        return false;
+      }else if(permission == LocationPermission.deniedForever){
+        debugPrint("'Location permissions are permanently denied");
+        return false;
+      }else{
+        debugPrint("GPS Location service is granted");
+        return true;
+      }
+    }else{
+      debugPrint("GPS Location permission granted.");
+      return true;
+    }
   }
 }

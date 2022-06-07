@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:kakaomap_webview/kakaomap_webview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 
 const String kakaoMapKey = '34c385f85c12d6b6fa19a40539c67b02';
 
@@ -17,8 +18,8 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late WebViewController _mapController;
-  final double _lat = 33.450701;
-  final double _lng = 126.570667;
+  double _lat = 37.553881;
+  double _lng = 126.970488;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +35,6 @@ class _MapScreenState extends State<MapScreen> {
             kakaoMapKey: kakaoMapKey,
             lat: _lat,
             lng: _lng,
-            showMapTypeControl: true,
-            draggableMarker: true,
             mapType: MapType.TERRAIN,
             mapController: (controller) {
               _mapController = controller;
@@ -46,33 +45,27 @@ class _MapScreenState extends State<MapScreen> {
             polygon: KakaoFigure(
               path: []
             ),
-            // overlayText: '카카오!',
-            customOverlayStyle: '''<style>
-              .customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
-.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
-.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #d95050;background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
-.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
-.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-              </style>''',
-            customOverlay: '''
-const content = '<div class="customoverlay">' +
-    '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
-    '    <span class="title">카카오!</span>' +
-    '  </a>' +
-    '</div>';
-const position = new kakao.maps.LatLng($_lat, $_lng);
-const customOverlay = new kakao.maps.CustomOverlay({
-    map: map,
-    position: position,
-    content: content,
-    yAnchor: 1
-});
-              ''',
-            markerImageURL:
-            'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
-            onTapMarker: (message) {
+            customScript: '''
+              map.setCenter(new kakao.maps.LatLng(37.553881, 126.970488));
+              var markers = [];
+
+              function addMarker(position) {
+                var marker = new kakao.maps.Marker({position: position});
+                marker.setMap(map);
+                markers.push(marker);
+              }
+
+              function removeAllMarker() {
+                marker.setMap(null);
+                markers = [];
+              }
+            ''',
+            // markerImageURL:
+            // 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
+            onTapMarker: (message) async {
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(message.message)));
+              _getLocation();
             },
             zoomChanged: (message) {
               debugPrint('[zoom] ${message.message}');
@@ -90,10 +83,11 @@ const customOverlay = new kakao.maps.CustomOverlay({
             },
           ),
           searchButton(),
+          returnLocationButton(),
           menuButton(),
         ],
       ),
-      endDrawer: Container(
+      endDrawer: SizedBox(
         width: size.width,
         child: drawerMenu()
       ),
@@ -106,6 +100,49 @@ const customOverlay = new kakao.maps.CustomOverlay({
 
   void _closeEndDrawer() {
     Navigator.pop(context);
+  }
+
+  _checkPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        debugPrint('Location permissions are denied');
+        return false;
+      }else if(permission == LocationPermission.deniedForever){
+        debugPrint("'Location permissions are permanently denied");
+        return false;
+      }else{
+        debugPrint("GPS Location service is granted");
+        return true;
+      }
+    }else{
+      debugPrint("GPS Location permission granted.");
+      return true;
+    }
+  }
+
+  _getLocation () async {
+    if(await _checkPermission()){
+      Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      debugPrint(position.latitude.toString());
+      debugPrint(position.longitude.toString());
+
+      try {
+        setState(() {
+          _lat = position.latitude;
+          _lng = position.longitude;
+        });
+      } catch (e) {
+        debugPrint(e.toString());
+      }
+
+
+      // _mapController.runJavascript('''
+      //   map.setCenter(new kakao.maps.LatLng($_lat, $_lng));
+      // ''');
+    }
   }
 
   drawerMenu() {
@@ -128,7 +165,7 @@ const customOverlay = new kakao.maps.CustomOverlay({
               title: Text('$index 맛집'),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text('첫째줄'),
                   Text('둘째줄')
                 ],
@@ -140,27 +177,59 @@ const customOverlay = new kakao.maps.CustomOverlay({
     );
   }
 
+  returnLocationButton() {
+    return Align(
+      alignment: Alignment.bottomLeft,
+      child: GestureDetector(
+        onTap: () async {await _getLocation();},
+        child: Container(
+          margin: const EdgeInsets.only(left: 16, bottom: 44),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2),
+              color: Colors.white,
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black45,
+                  blurRadius: 1,
+                )
+              ]),
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const <Widget>[
+              Icon(
+                Icons.my_location,
+                color: Colors.black54,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   searchButton() {
     return Align(
       alignment: Alignment.bottomRight,
       child: GestureDetector(
         onTap: () {},
         child: Container(
-          margin: EdgeInsets.only(right: 16, bottom: 44),
+          margin: const EdgeInsets.only(right: 16, bottom: 44),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2),
               color: Colors.white,
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Colors.black45,
                   blurRadius: 1,
                 )
               ]),
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
+            children: const <Widget>[
               Icon(
                 Icons.search,
                 color: Colors.black54,
@@ -178,21 +247,21 @@ const customOverlay = new kakao.maps.CustomOverlay({
       child: GestureDetector(
         onTap: _openEndDrawer,
         child: Container(
-          margin: EdgeInsets.only(right: 16, top: 44),
+          margin: const EdgeInsets.only(right: 16, top: 44),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2),
               color: Colors.white,
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Colors.black45,
                   blurRadius: 1,
                 )
               ]),
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
+            children: const <Widget>[
               Icon(
                 Icons.menu,
                 color: Colors.black54,
