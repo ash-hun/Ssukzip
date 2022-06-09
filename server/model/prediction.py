@@ -1,6 +1,6 @@
 from silence_tensorflow import silence_tensorflow
 silence_tensorflow()
-import ssukzip_modelGenerator as mm
+from model import ssukzip_modelGenerator as mm
 from konlpy.tag import Okt
 from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import plot_model
