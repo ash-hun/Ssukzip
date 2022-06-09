@@ -75,7 +75,6 @@ async def signUpKakao(code:str, db: Session = Depends(get_db)):
         crud.create_user(db=db, user=user)
 
     jwt_token = auth.generate_token(user.email)
-
     auth.verify_jwttoken(jwt_token['access_token'])
 
     return JSONResponse(content=jwt_token)
@@ -95,23 +94,30 @@ async def signUpKakao(code:str, db: Session = Depends(get_db)):
 #     return JSONResponse(resp.json())
 
 
-@router.get("/user/me")
-async def getMyInfo(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-
-    email = auth.verify_jwttoken(token)
-
-    return crud.get_user_by_email(db= db, email = email)
+@router.get("/user/me", status_code = 201)
+async def getMyInfo(response: Response, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    if(oauth.verify_jwttoken(token)):
+        email = auth.verify_jwttoken(token)
+        return crud.get_user_by_email(db= db, email = email)
+    else:
+        response.status_code = status_code.HTTP_401_UNAUTHORIZED
+        return {"msg": "인증/재인증이 필요합니다."}
 
 @router.delete("/user/delete", status_code=201)
-async def deleteUser(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-
-    email = auth.verify_jwttoken(token)
-
-    return JSONResponse(content= crud.delete_user(db = db, email = email))
+async def deleteUser(response: Response, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    if auth.verify_jwttoken(token):
+        email = auth.verify_jwttoken(token)
+        return crud.delete_user(response=response,db = db, email = email)
+    else:
+        response.status_code = status_code.HTTP_401_UNAUTHORIZED
+        return {"msg": "인증/재인증이 필요합니다."}
 
 @router.put("/user/update/nickname", status_code=201)
-async def updateNickname(nickname:str, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-
-    email = auth.verify_jwttoken(token)
-    result = crud.update_user_nickname(db = db, email = email, nickname = nickname)
-    return result
+async def updateNickname(response: Response, token: str = Depends(oauth2_scheme), nickname:str, token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    if(auth.verify_jwttoken(token)):
+        email = auth.verify_jwttoken(token)
+        result = crud.update_user_nickname(response=response, db = db, email = email, nickname = nickname)
+        return result
+    else:
+        response.status_code = status_code.HTTP_401_UNAUTHORIZED
+        return {"msg": "인증/재인증이 필요합니다."}

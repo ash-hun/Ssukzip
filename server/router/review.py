@@ -23,16 +23,29 @@ router = APIRouter()
 async def createReview(response: Response, review : schemas.Review, token: str = Depends(oauth2_scheme) ,db: Session = Depends(get_db)):
     if(auth.verify_jwttoken(token)):
         email = auth.verify_jwttoken(token)
-        user_id = crud.get_user_by_email(db=db, email = email).id
-        return reviewcrud.create_review(response=response, db=db, review = review)
+        print(email)
+        user = crud.get_user_by_email(db=db, email = email)
+        print(user)
+        return reviewcrud.create_review(response=response, db=db, review = review, user_id = user.id, user_nickname=user.nickname)
     else:
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {"msg": "인증/재인증이 필요합니다."}
 
-@router.get("/review/info/{review_id}", status_code=200)
-async def getReview(response: Response, review_id : int, token: str = Depends(oauth2_scheme) ,db: Session = Depends(get_db)):
+@router.get("/review/info/{market_id}", status_code=200)
+async def getReview(response: Response, market_id : int, token: str = Depends(oauth2_scheme) ,db: Session = Depends(get_db)):
     if(auth.verify_jwttoken(token)):
-        return reviewcrud.get_review(response=response, db=db, review_id=review_id)
+        return reviewcrud.get_review_by_marketid(response=response, db=db, market_id=market_id)
+    else:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {"msg" : "인증/재인증이 필요합니다."}
+
+@router.get("/review/myinfo", status_code=200)
+async def getReviewByMe(response: Response, token: str = Depends(oauth2_scheme) ,db: Session = Depends(get_db)):
+    if(auth.verify_jwttoken(token)):
+        email = auth.verify_jwttoken(token)
+        user = crud.get_user_by_email(db=db, email = email)
+        print(user.nickname)
+        return reviewcrud.get_review_by_userid(response=response, db=db, user_id=user.id)
     else:
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {"msg" : "인증/재인증이 필요합니다."}

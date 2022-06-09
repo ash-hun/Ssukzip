@@ -22,8 +22,9 @@ class Review(Base):
     __tablename__="review"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer,ForeignKey('user.id'))
-    market_id = Column(Integer,ForeignKey('market.id'))
+    user_id = Column(Integer,ForeignKey("user.id"))
+    user_nickname = Column(String(20))
+    market_id = Column(Integer)
     rate = Column(Integer)
     comment = Column(Text)
     solution = Column(Text)
@@ -36,4 +37,4 @@ class Market(Base):
     market_latitude = Column(Float)
     market_longitude = Column(Float)
     phone = Column(String(12))
-    review = relationship("Review", primaryjoin="Market.id == Review.market_id")
+    #review = relationship("Review", primaryjoin="Market.id == Review.market_id")

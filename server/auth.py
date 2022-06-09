@@ -36,7 +36,7 @@ def get_kakao_token(code:str):
     'grant_type':'authorization_code'
     }
 
-    resp = requests.post(url, data=data)
+    resp = requests.post(url, data=data,headers={'Content-Type': 'application/x-www-form-urlencoded'})
     token_info = resp.json()
 
     return token_info

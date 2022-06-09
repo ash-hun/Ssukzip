@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 import models, schemas
 import database
-
+from fastapi import FastAPI, Response, status
 
 
 def create_user(db: Session, user: schemas.User):
@@ -13,6 +13,7 @@ def create_user(db: Session, user: schemas.User):
         return {'msg': "추가되었습니다."}
     except Exception as e:
         return {'msg': e}
+
 def get_user(db: Session, user_id: int):
    try:
         user = db.query(models.User).filter(models.User.id == User_id).first()
@@ -50,20 +51,22 @@ def update_user_token(db: Session, email:str, token: str):
     except Exception as e:
         return {'msg': e}
 
-def delete_user(db: Session, email: str):
+def delete_user(response: Response, db: Session, email: str):
     try:
         user = db.query(models.User).filter_by(email=email).first()
         if(user):
             db.delete(user)
             db.commit()
         else:
+            response.status_code = status_code.HTTP_204_NOCONTENT
             return {'msg': "해당 유저는 존재하지 않습니다."}
 
         return {'msg': "삭제되었습니다."}
     except Exception as e:
+        response.status_code = status_code.HTTP_409_CONFLICT
         return {'msg': e}
 
-def update_user_nickname(db: Session, email: str, nickname: str):
+def update_user_nickname(response: Response, db: Session, email: str, nickname: str):
     try:
         user = db.query(models.User).filter_by(email=email).first()
         if(user):
@@ -71,10 +74,12 @@ def update_user_nickname(db: Session, email: str, nickname: str):
             db.add(user)
             db.commit()
         else:
+            response.status_code = status_code.HTTP_204_NOCONTENT
             return {'msg': "해당 유저는 존재하지 않습니다."}
 
         return {'msg': "수정되었습니다."}
     except Exception as e:
+        response.status_code = status.HTTP_409_CONFLICT
         return {'msg': e}
 
 
