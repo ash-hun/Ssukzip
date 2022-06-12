@@ -1,11 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ssukzip.ssukzip">
-    <uses-permission android:name="android.permission.INTERNET" />
-    <application
+    package="com.example.ssukzip">
+   <application
         android:label="ssukzip"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
-        android:usesCleartextTraffic="true">
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"
