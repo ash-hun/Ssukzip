@@ -18,7 +18,7 @@ def read_data(filename):
 
 def tokenize(doc):
     # norm은 정규화, stem은 근어로 표시하기를 나타냄
-    return ['/'.join(t) for t in okt.pos(doc, norm=True, stem=True)]
+    return ['/'.join(t) for t in Okt().pos(doc, norm=True, stem=True)]
 
 def term_frequency(doc):
     return [doc.count(word) for word in selected_words]

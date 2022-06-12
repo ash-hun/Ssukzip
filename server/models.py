@@ -26,8 +26,10 @@ class Review(Base):
     user_nickname = Column(String(20))
     market_id = Column(Integer)
     rate = Column(Integer)
+    recommend = Column(Integer, default = 0)
     comment = Column(Text)
     solution = Column(Text)
+    filtering_comment = Column(Text)
 
 class Market(Base):
     __tablename__="market"

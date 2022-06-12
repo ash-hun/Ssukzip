@@ -23,8 +23,8 @@ def classifyReview(modelName, review, korcenModule):
     if (not state):
         okt = Okt()
         model = load_model(modelName)
-        train_data = mm.read_data('ratings_train.txt')
-        test_data = mm.read_data('ratings_test.txt')
+        train_data = mm.read_data('./model/ratings_train.txt')
+        test_data = mm.read_data('./model/ratings_test.txt')
 
         token = ['/'.join(t) for t in okt.pos(review, norm=True, stem=True)]
 

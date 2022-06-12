@@ -11,6 +11,7 @@ class User(BaseModel):
     token: str= None
 
 class Review(BaseModel):
+    review_id: int
     market_id: str= None
     rate: int= None
     comment : str= None

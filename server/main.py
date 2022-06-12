@@ -3,7 +3,7 @@ from fastapi import Depends, FastAPI, HTTPException, Response, status
 from pydantic import BaseModel
 from typing import Optional
 from sqlalchemy.orm import Session, sessionmaker
-
+from fastapi.middleware.cors import CORSMiddleware
 import sqlalchemy.orm.session
 import requests
 import jwt
@@ -16,6 +16,16 @@ from router import oauth,review,market
 models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Dependency
 def get_db():

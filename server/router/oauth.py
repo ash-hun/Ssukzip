@@ -21,8 +21,8 @@ router = APIRouter()
 config = Config('.env')
 
 @router.get("/auth")
-async def signUpGoogle(code:str, db: Session = Depends(get_db)):
-    token_info = auth.get_google_token(code)
+async def signUpGoogle(code:str, redirectUri:str, db: Session = Depends(get_db)):
+    token_info = auth.get_google_token(code, redirectUri)
     access_token = token_info['access_token']
     refresh_token = token_info['refresh_token']
 
@@ -49,9 +49,9 @@ async def signUpGoogle(code:str, db: Session = Depends(get_db)):
     return JSONResponse(content=jwt_token)
 
 @router.get("/auth/kakao")
-async def signUpKakao(code:str, db: Session = Depends(get_db)):
+async def signUpKakao(code:str, redirectUri:str, db: Session = Depends(get_db)):
 
-    token_info = auth.get_kakao_token(code)
+    token_info = auth.get_kakao_token(code, redirectUri)
     access_token = token_info['access_token']
     refresh_token = token_info['refresh_token']
     print("토큰 발급 완료" + access_token)

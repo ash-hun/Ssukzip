@@ -32,7 +32,7 @@ async def createReview(response: Response, review : schemas.Review, token: str =
         return {"msg": "인증/재인증이 필요합니다."}
 
 @router.get("/review/info/{market_id}", status_code=200)
-async def getReview(response: Response, market_id : int, token: str = Depends(oauth2_scheme) ,db: Session = Depends(get_db)):
+async def getReview(response: Response, market_id : str, token: str = Depends(oauth2_scheme) ,db: Session = Depends(get_db)):
     if(auth.verify_jwttoken(token)):
         return reviewcrud.get_review_by_marketid(response=response, db=db, market_id=market_id)
     else:
@@ -63,5 +63,13 @@ async def deleteReview(response: Response, review_id : int, token: str = Depends
     if(auth.verify_jwttoken(token)):
         return reviewcrud.delete_review(response=response, db=db, review_id=review_id)
     else:
-        response.status_code = status_code.HTTP_401_UNAUTHORIZED
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {"msg" : "인증/재인증이 필요합니다."}
+
+@router.get("/review/recommend/{review_id}", status_code= 200)
+async def recommendReview(response: Response, review_id : int, token: str = Depends(oauth2_scheme) ,db: Session = Depends(get_db)):
+    if(auth.verify_jwttoken(token)):
+        return reviewcrud.recommend_review(response=response, db=db, review_id=review_id)
+    else:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
         return {"msg" : "인증/재인증이 필요합니다."}

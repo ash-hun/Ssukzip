@@ -9,14 +9,14 @@ import database, requests
 
 config = Config('.env')
 #구글 토큰 얻어오기
-def get_google_token(code:str):
+def get_google_token(code:str, redirectUri:str):
     print(config)
     url = "https://oauth2.googleapis.com/token"
     data={
     'code': code,
     'client_id':config('GOOGLE_CLIENT_ID', default=None),
     'client_secret': config('GOOGLE_CLIENT_SECRET', default=None),
-    'redirect_uri':'http://localhost:8000/auth',
+    'redirect_uri':redirectUri,
     'grant_type':'authorization_code'
     }
 
@@ -25,14 +25,14 @@ def get_google_token(code:str):
     return token_info
 
 #카카오 토큰 얻어오기
-def get_kakao_token(code:str):
+def get_kakao_token(code:str, redirectUri:str):
     code = parse.urlparse(code)
     print(code.path)
     url = "https://kauth.kakao.com/oauth/token"
     data={
     'code': code.path,
     'client_id':config('KAKAO_CLIENT_ID', default=None),
-    'redirect_uri':'http://localhost:8000/auth/kakao',
+    'redirect_uri':redirectUri,
     'grant_type':'authorization_code'
     }
 
