@@ -1,63 +1,62 @@
-# 2022-1-CAPSTONE-SsukZip
-# 🏆 2022-1학기 캡스톤디자인 프로젝트
-<br>
+<div align="center">
+  <img src="https://github.com/ash-hun/2022-1-CAPSTONE-SsukZip/blob/main/_storage/README%20TITLE%20LOGO.png"/>
+</div>
 
-## ✏프로젝트 개요
+<h3 align="center"><i>"Creating new value with rotten reviews, SsukZip"</i></h3>
+
+---  
+
+<div align="center">
+  <img src="https://img.shields.io/badge/ v15.6-007aff?style=flat&logo=iOS&logoColor=ffffff">
+  <img src="https://img.shields.io/badge/ Android v12.0-32de84?style=flat&logo=Android&logoColor=ffffff">
+  <img src="https://img.shields.io/badge/ React v18.1.0-0088CC?style=flat&logo=React&logoColor=ffffff">
+  <img src="https://img.shields.io/badge/ Next.Js v10.2.4-000000?style=flat&logo=Next.Js&logoColor=ffffff">
+  <img src="https://img.shields.io/badge/ Chakra UI v9.6.0-319795?style=flat&logo=Chakra UI&logoColor=ffffff">
+  <img src="https://img.shields.io/badge/ Flutter v3.0.2-02569B?style=flat&logo=Flutter&logoColor=ffffff"><br/>
+  <img src="https://img.shields.io/badge/ Python v3.8.0-3776AB?style=flat&logo=Python&logoColor=ffffff">
+  <img src="https://img.shields.io/badge/ fastAPI v0.78-009688?style=flat&logo=fastapi&logoColor=ffffff">
+  <img src="https://img.shields.io/badge/ Tensorflow v2.5.0-FF6F00?style=flat&logo=tensorflow&logoColor=ffffff">
+</div>
+
+## ✏ About
 
 [입맛이 까다로운 사람들을 위한 맛집 - 썩집](https://topaz-joke-66e.notion.site/0bc09ef214404394b3ffba812c2d22b4)  
 <br>
-## 👩🏼‍🤝‍👩🏻프로젝트 팀원
+## 👩🏼‍🤝‍👩🏻Contributor
 
+<a href="https://github.com/Dongbok-Lee">
+      <img src=https://img.shields.io/badge/(Leader)_Dongbok__Lee-e56b6f?style=flatsquare&labelColor=eaac8b />
+</a>
+<a href="https://github.com/ash-hun">
+      <img src=https://img.shields.io/badge/ash__hun-000000?style=flatsquare&labelColor=6d6875 />
+</a>
+<a href="https://github.com/hig4342">
+      <img src=https://img.shields.io/badge/hig4342-174240?style=flatsquare&labelColor=8fb9aa />
+</a>
 
-- **컴퓨터공학과 4학년 최재훈**  
-- **컴퓨터공학과 3학년 이동복 (Leader)**
-- **컴퓨터공학과 3학년 황인규**
 <br>
 
-## 📅일정
+## 📅 Schedule
 
+[**👉 프로젝트 일정**](https://topaz-joke-66e.notion.site/32d0a4726f7c4c5ab2c5463326492c15)
 
-[프로젝트 일정](https://topaz-joke-66e.notion.site/32d0a4726f7c4c5ab2c5463326492c15)
+## 📃Contents
 
-[포지션별 상세일정](https://topaz-joke-66e.notion.site/16cc320cf1d341cab8c8486c740da3e1)
+[**👉 요구사항 명세서**](https://topaz-joke-66e.notion.site/3262ab387ec84bdc88e77bf7a4d87fc2)
+
+[**👉 API 문서**](https://topaz-joke-66e.notion.site/API-727f125323e54b88910c0aae9c9426c1)
+
+[**👉 데이터베이스 ERD**](https://topaz-joke-66e.notion.site/ERD-72395b4c0c744a7e82d1831c3fb22cd8)
+
+[**👉 와이어프레임**](https://topaz-joke-66e.notion.site/b42854327b8d47ca8e9db0f3c8bad5cd)
+
+[**👉 데이터 플로우**](https://topaz-joke-66e.notion.site/92a0e2c03e64442881db5cf938ab8c2c)
+
+[**👉 사용 라이브러리, 기술 스택**](https://topaz-joke-66e.notion.site/450b91ba4eae4a84ba1f61b90f13ad61)
 <br><br>
 
-## 📃설계문서
-
-
-[요구사항 명세서](https://topaz-joke-66e.notion.site/3262ab387ec84bdc88e77bf7a4d87fc2)
-
-[API 문서](https://topaz-joke-66e.notion.site/API-727f125323e54b88910c0aae9c9426c1)
-
-[데이터베이스 ERD](https://topaz-joke-66e.notion.site/ERD-72395b4c0c744a7e82d1831c3fb22cd8)
-
-[와이어프레임](https://topaz-joke-66e.notion.site/b42854327b8d47ca8e9db0f3c8bad5cd)
-
-[데이터 플로우](https://topaz-joke-66e.notion.site/92a0e2c03e64442881db5cf938ab8c2c)
-
-[사용 라이브러리, 기술 스택](https://topaz-joke-66e.notion.site/450b91ba4eae4a84ba1f61b90f13ad61)
-<br><br>
-
-## 📖회의록
-
-
-[썩집 1차 회의(2022 - 03 - 22)](https://topaz-joke-66e.notion.site/1-2022-03-22-ccb37b4a0a704fe6a27a4541411cde6a)
-
-[썩집 2차 회의(2022 - 03 - 29)](https://topaz-joke-66e.notion.site/2-2022-03-29-26e127c48f0147daa2cb0b473f6e8342)
-
-[썩집 3차 회의(2022 - 04 - 05)](https://topaz-joke-66e.notion.site/3-2022-04-05-c074945a8b774091ae0e9c28379215eb)
-
-[썩집 4차 회의(2022 - 04 - 12)](https://topaz-joke-66e.notion.site/4-2022-04-12-9d145a134929471e85ed4b5bc4d070a9)
-
-[썩집 5차 회의(2022 - 04 - 17)](https://topaz-joke-66e.notion.site/5-2022-04-17-d6c6d0f471c74462a47c41e27e182b8c)
-
-[썩집 6차 회의(2022 - 04 - 27)](https://topaz-joke-66e.notion.site/6-2022-04-27-665549dd3f864bc0922baa1d1406f6ed)
-
-[썩집 7차 회의(2022 - 05 - 03)](https://topaz-joke-66e.notion.site/7-2022-05-03-b8e1d7d3ca864fb69397a0baf45ad1f9)
-
-[썩집 8차 회의(2022 - 05 - 10)](https://topaz-joke-66e.notion.site/8-2022-05-10-0f3b9267e0734c20ba8579082bf3429e)
-
-[썩집 9차 회의(2022 - 05 - 17)](https://topaz-joke-66e.notion.site/9-2022-05-17-aa80f2ccf3f943a48f68687529237e45)
+## 🙏 CopyRight
+> Copyright 2022.06. Contributor(ash-hun, Dongbok-Lee, hig4342), All of contents cannot be copied without contributor's permission
 
 
 
