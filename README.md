@@ -19,14 +19,12 @@
 </div>
 
 
-
-https://user-images.githubusercontent.com/32566767/176676403-e648fa20-66fa-425f-afeb-2e4e81ed6626.mp4
-
+## 👊 Preview
+  [Preview Link](https://drive.google.com/file/d/1YpZf19v0zrCx1jzu9wDSLTDbXmpR_jf1/view?usp=sharing)  
 
 ## ✏ About
+[Notion 입맛이 까다로운 사람들을 위한 맛집 - 썩집](https://topaz-joke-66e.notion.site/0bc09ef214404394b3ffba812c2d22b4)  
 
-[입맛이 까다로운 사람들을 위한 맛집 - 썩집](https://topaz-joke-66e.notion.site/0bc09ef214404394b3ffba812c2d22b4)  
-<br>
 ## 👩🏼‍🤝‍👩🏻Contributor
 
 <a href="https://github.com/Dongbok-Lee">
@@ -39,11 +37,8 @@ https://user-images.githubusercontent.com/32566767/176676403-e648fa20-66fa-425f-
       <img src=https://img.shields.io/badge/hig4342-174240?style=flatsquare&labelColor=8fb9aa />
 </a>
 
-<br>
-
 ## 📅 Schedule
-
-[**👉 프로젝트 일정**](https://topaz-joke-66e.notion.site/32d0a4726f7c4c5ab2c5463326492c15)
+[**👉 프로젝트 일정**](https://topaz-joke-66e.notion.site/32d0a4726f7c4c5ab2c5463326492c15)  
 
 ## 📃Contents
 
