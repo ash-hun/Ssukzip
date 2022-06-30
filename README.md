@@ -18,6 +18,11 @@
   <img src="https://img.shields.io/badge/ Tensorflow v2.5.0-FF6F00?style=flat&logo=tensorflow&logoColor=ffffff">
 </div>
 
+
+
+https://user-images.githubusercontent.com/32566767/176676403-e648fa20-66fa-425f-afeb-2e4e81ed6626.mp4
+
+
 ## ✏ About
 
 [입맛이 까다로운 사람들을 위한 맛집 - 썩집](https://topaz-joke-66e.notion.site/0bc09ef214404394b3ffba812c2d22b4)  
