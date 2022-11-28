@@ -19,8 +19,14 @@
 </div>
 
 
-## 👊 Preview
-  [Preview Link](https://drive.google.com/file/d/1YpZf19v0zrCx1jzu9wDSLTDbXmpR_jf1/view?usp=sharing)  
+## 👊 Preview  
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/32566767/204278717-290c7ed9-8654-487e-a2d0-bbdc2e882e97.gif" />
+  <a href="https://drive.google.com/file/d/1YpZf19v0zrCx1jzu9wDSLTDbXmpR_jf1/view?usp=sharing">
+    <b><i><p>More Video</p></i></b>
+  </a>
+</div>
 
 ## ✏ About
 [Notion 입맛이 까다로운 사람들을 위한 맛집 - 썩집](https://topaz-joke-66e.notion.site/0bc09ef214404394b3ffba812c2d22b4)  
