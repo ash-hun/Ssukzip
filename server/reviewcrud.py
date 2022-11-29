@@ -26,7 +26,7 @@ def create_review(response: Response, db: Session, review = schemas.Review, user
         db.refresh(db_review)
         return {db_review}
     except Exception as e:
-        response.status_code = HTTP_409_CONFLICT
+        response.status_code = status.HTTP_409_CONFLICT
         return {'msg': "e"}
 
 def update_review(response: Response, db: Session, review = schemas.Review):
