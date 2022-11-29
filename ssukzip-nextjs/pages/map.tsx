@@ -1,6 +1,6 @@
 import * as React from 'react'
 import type { GetServerSideProps, NextPage } from 'next'
-import { Map as KaKaoMap, MapMarker, useInjectKakaoMapApi } from 'react-kakao-maps-sdk'
+import { Map as KaKaoMap, MapMarker } from 'react-kakao-maps-sdk'
 import {
   Icon,
   IconButton

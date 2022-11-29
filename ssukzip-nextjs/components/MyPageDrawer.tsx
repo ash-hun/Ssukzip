@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {
   Avatar,
+  Button,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -17,8 +18,9 @@ import {
 } from '@chakra-ui/react'
 import { MdModeEdit } from 'react-icons/md'
 import axios from 'axios'
-import { getCookie } from 'cookies-next'
+import { getCookie, removeCookies } from 'cookies-next'
 import { server } from '../constants/env'
+import { useRouter } from 'next/router'
 
 interface User {
   email: string
@@ -37,7 +39,7 @@ interface Props {
 }
 
 const MyPageDrawer: React.FC<Props> = ({user, isOpen, onClose}) => {
-  
+  const route = useRouter()
   const handleSubmit = async (nextValue: string) => {
     const access_token = getCookie('access_token')
     const data = await axios.post(`${server}/user/update/nickname`, {
@@ -53,6 +55,11 @@ const MyPageDrawer: React.FC<Props> = ({user, isOpen, onClose}) => {
     .catch(err => console.error(err))
 
     console.log(data)
+  }
+
+  const handleLogout = () => {
+    removeCookies('access_token')
+    route.push('/')
   }
 
   return (
@@ -90,6 +97,7 @@ const MyPageDrawer: React.FC<Props> = ({user, isOpen, onClose}) => {
               <EditableControls />
             </Editable>
             <Text>{user.email}</Text>
+            <Button onClick={handleLogout}>로그아웃</Button>
           </DrawerBody>
         </DrawerContent>
     </Drawer>
