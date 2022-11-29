@@ -28,21 +28,10 @@
   </a>
 </div>
 
-## ✏ About
-[Notion 입맛이 까다로운 사람들을 위한 맛집 - 썩집](https://topaz-joke-66e.notion.site/0bc09ef214404394b3ffba812c2d22b4)  
+## 📑 Docs
+[입맛이 까다로운 사람들을 위한 맛집 - 썩집](https://topaz-joke-66e.notion.site/0bc09ef214404394b3ffba812c2d22b4)  
 
-## 👩🏼‍🤝‍👩🏻Contributor
-
-<a href="https://github.com/Dongbok-Lee">
-      <img src=https://img.shields.io/badge/(Leader)_Dongbok__Lee-e56b6f?style=flatsquare&labelColor=eaac8b />
-</a>
-<a href="https://github.com/ash-hun">
-      <img src=https://img.shields.io/badge/ash__hun-000000?style=flatsquare&labelColor=6d6875 />
-</a>
-<a href="https://github.com/hig4342">
-      <img src=https://img.shields.io/badge/hig4342-174240?style=flatsquare&labelColor=8fb9aa />
-</a>
-
+<!--- 
 ## 📅 Schedule
 [**👉 프로젝트 일정**](https://topaz-joke-66e.notion.site/32d0a4726f7c4c5ab2c5463326492c15)  
 
@@ -60,7 +49,7 @@
 
 [**👉 사용 라이브러리, 기술 스택**](https://topaz-joke-66e.notion.site/450b91ba4eae4a84ba1f61b90f13ad61)
 <br><br>
-
+--->
 ## 🙏 CopyRight
 > Copyright 2022.06. Contributor(ash-hun, Dongbok-Lee, hig4342), All of contents cannot be copied without contributor's permission
 
