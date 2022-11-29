@@ -34,6 +34,7 @@ import PhoneLink from './PhoneLink'
 import { Rating } from '@mui/material'
 import { getCookie } from 'cookies-next'
 import { server } from '../constants/env'
+import {AiOutlineFrown, AiOutlineSmile} from 'react-icons/ai'
 
 interface Marker {
   position: {
@@ -60,6 +61,30 @@ interface Props {
   isOpen: boolean
   onOpen?: () => void
   onClose: () => void
+}
+
+const ReviewMapping = ({review}: {review: string}) => {
+  const reviewPer = React.useMemo(() => 
+    Number(review.split(']는')[1].split('%')[0]).toFixed(3) + "%",
+    [review],
+  )
+  if (review.includes("긍정")) {
+    return (
+      <div>
+        <AiOutlineSmile color='green' style={{ display: 'inline' }}/>
+        {' '}
+        <Text color='green' style={{ display: 'inline' }}>{reviewPer}</Text>
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <AiOutlineFrown color='red' style={{ display: 'inline' }}/>
+        {' '}
+        <Text color='red' style={{ display: 'inline' }}>{reviewPer}</Text>
+      </div>
+    )
+  }
 }
 
 const InfoDrawer: React.FC<Props> = ({marker, isOpen, onClose}) => {
@@ -234,9 +259,7 @@ const InfoDrawer: React.FC<Props> = ({marker, isOpen, onClose}) => {
                         <LikeButton id={reply.id}/>
                         <Text fontSize='sm'>좋아요</Text>
                       </Stack>
-                      <Text>
-                        {reply.filtering_comment}
-                      </Text>
+                      <ReviewMapping review={reply.filtering_comment} />
                     </Box>
                   ))}
                 </Stack>

@@ -1,7 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import {
-  Button, Stack
+  Button, Center
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
@@ -32,14 +32,11 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-      <Stack direction='column' spacing={4}>
-        <Button width='auto' colorScheme='teal' variant='solid' onClick={handleGoogle}>
-          Sign in with Google
-        </Button>
-        <Button width='auto' colorScheme='kakao' variant='solid' onClick={handleKakao}>
+      <Center h="100vh">
+        <Button width='auto' colorScheme='kakao' variant='solid' w={48} onClick={handleKakao}>
           Login with Kakao
         </Button>
-      </Stack>
+      </Center>
       </main>
     </div>
   )
