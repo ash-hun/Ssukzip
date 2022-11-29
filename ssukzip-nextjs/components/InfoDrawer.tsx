@@ -64,8 +64,13 @@ interface Props {
 }
 
 const ReviewMapping = ({review}: {review: string}) => {
-  const reviewPer = React.useMemo(() => 
-    Number(review.split(']는')[1].split('%')[0]).toFixed(3) + "%",
+  const reviewPer = React.useMemo(() => {
+    if(review.includes("비속어")) {
+      return "비속어"
+    } else {
+      return Number(review.split(']는')[1].split('%')[0]).toFixed(3) + "%"
+    }
+  },
     [review],
   )
   if (review.includes("긍정")) {
