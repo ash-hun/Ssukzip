@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
   })
   .then(res => res.data)
   .catch(err => console.error(err))
-
+  console.log(res)
   if(!res) {
     return {
       redirect: {

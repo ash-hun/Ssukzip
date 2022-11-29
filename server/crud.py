@@ -47,7 +47,7 @@ def update_user_token(db: Session, email:str, token: str):
             db.add(user_update)
             db.commit()
         else:
-            return {'msg': "해당 유저는 존재하지 않습니다."}
+            return
     except Exception as e:
         return {'msg': e}
 
