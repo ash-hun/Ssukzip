@@ -1,0 +1,27 @@
+name: Cd with fastapi server
+ 
+on: 
+  push: 
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+permissions: 
+  contents: read
+
+jobs:
+ deploy:
+    name: Deploy To Server
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Test ssh-action
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.HOST}}
+          username: ${{secrets.USERNAME}}
+          password: ${{secrets.PASSWORD}}
+          port: ${{secrets.PORT}}
+          script: |
+          
+            cd ssukzip2
+            ./deploy_ssukzip.sh
