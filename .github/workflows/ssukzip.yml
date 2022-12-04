@@ -43,5 +43,5 @@ jobs:
 
             cd ssukzip2
             cd ssukzip_backend/2022-1-CAPSTONE-SsukZip/server
-            nohup uvicorn main:app --reload --host=0.0.0.0 --port=8099 > nohup.out 2> nohup.err < /dev/null &
+            { nohup uvicorn main:app --reload --host=0.0.0.0 --port=8099 > nohup.out 2> nohup.err < /dev/null & }
 
