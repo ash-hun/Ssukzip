@@ -24,7 +24,6 @@ jobs:
           script: |
           
             cd ssukzip2
-            ./deploy_ssukzip.sh
             cd ssukzip_backend/2022-1-CAPSTONE-SsukZip/server
             kill -9 `lsof -i | grep 8099 | awk '{print $2}'`
             cd ..
