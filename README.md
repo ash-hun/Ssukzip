@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/ Tensorflow v2.5.0-FF6F00?style=flat&logo=tensorflow&logoColor=ffffff">
 </div>
 
-## 🔥 Ssukzip **[Go!](https://222.118.103.229:3005)**
+## 🔥 Ssukzip **[Go!](https://url.kr/g978xs)**
 
 
 ## 👊 Preview  
