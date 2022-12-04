@@ -23,7 +23,7 @@ jobs:
           port: ${{secrets.PORT}}
           script: |
           
-            cd ssukzip2/ssukzip_backend/2022-1-CAPSTONE-SsukZip/server
+            cd ssukzip2
             ./deploy_ssukzip.sh
 
 
