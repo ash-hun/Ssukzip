@@ -1,6 +1,6 @@
 name: Cd with fastapi server
   
-on: 
+on:  
   push: 
     branches: [ develop ] 
   pull_request:
