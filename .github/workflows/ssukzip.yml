@@ -1,5 +1,5 @@
 name: Cd with fastapi server
- 
+  
 on: 
   push: 
     branches: [ develop ]
