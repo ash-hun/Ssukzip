@@ -1,48 +1,48 @@
-name: Cd with fastapi server
+# name: Cd with fastapi server
    
-on:  
-  push: 
-    branches: [ develop ]   
-  pull_request:
-    branches: [ develop ]
+# on:  
+#   push: 
+#     branches: [ develop ]   
+#   pull_request:
+#     branches: [ develop ]
 
-permissions: 
-  contents: read
+# permissions: 
+#   contents: read
 
-jobs:
- deploy:
-    name: Deploy To Server
-    runs-on: ubuntu-latest
-    steps: 
-      - name: Test ssh-action
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{secrets.HOST}}
-          username: ${{secrets.USERNAME}}
-          password: ${{secrets.PASSWORD}}
-          port: ${{secrets.PORT}}
-          script: |
+# jobs:
+#  deploy:
+#     name: Deploy To Server
+#     runs-on: ubuntu-latest
+#     steps: 
+#       - name: Test ssh-action
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{secrets.HOST}}
+#           username: ${{secrets.USERNAME}}
+#           password: ${{secrets.PASSWORD}}
+#           port: ${{secrets.PORT}}
+#           script: |
           
-            cd ssukzip2
-            cd ssukzip_backend/2022-1-CAPSTONE-SsukZip/server
-            kill -9 `lsof -i | grep 8099 | awk '{print $2}'`
-            cd ..
-            git pull origin develop
- deploy2:
-    name: Deploy To Server2
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps: 
-      - name: Test ssh-action
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{secrets.HOST}}
-          username: ${{secrets.USERNAME}}
-          password: ${{secrets.PASSWORD}}
-          port: ${{secrets.PORT}}
-          script: |
+#             cd ssukzip2
+#             cd ssukzip_backend/2022-1-CAPSTONE-SsukZip/server
+#             kill -9 `lsof -i | grep 8099 | awk '{print $2}'`
+#             cd ..
+#             git pull origin develop
+#  deploy2:
+#     name: Deploy To Server2
+#     needs: deploy
+#     runs-on: ubuntu-latest
+#     steps: 
+#       - name: Test ssh-action
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{secrets.HOST}}
+#           username: ${{secrets.USERNAME}}
+#           password: ${{secrets.PASSWORD}}
+#           port: ${{secrets.PORT}}
+#           script: |
 
-            cd ssukzip2
-            cd ssukzip_backend/2022-1-CAPSTONE-SsukZip/server
-            { nohup uvicorn main:app --reload --host=0.0.0.0 --port=8099 > nohup.out 2> nohup.err < /dev/null & }
+#             cd ssukzip2
+#             cd ssukzip_backend/2022-1-CAPSTONE-SsukZip/server
+#             { nohup uvicorn main:app --reload --host=0.0.0.0 --port=8099 > nohup.out 2> nohup.err < /dev/null & }
 
