@@ -1,7 +1,7 @@
 name: Cd with fastapi server
    
 on:  
-  push: 
+  push:  
     branches: [ develop ]   
   pull_request:
     branches: [ develop ]
@@ -24,6 +24,7 @@ jobs:
           script: |
           
             cd ssukzip2
+            chmod +x deploy_ssukzip.sh
             ./deploy_ssukzip.sh
 
 
