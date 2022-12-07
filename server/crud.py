@@ -19,8 +19,7 @@ def get_user(db: Session, user_id: int):
         user = db.query(models.User).filter(models.User.id == User_id).first()
         if(user):
             return user
-        else:
-            return {'msg': "해당 유저는 존재하지 않습니다."}
+        return
    except Exception as e:
         return {'msg': e}
 
