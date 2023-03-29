@@ -24,7 +24,6 @@ jobs:
           script: |
           
             cd ssukzip2
-            chmod +x deploy_ssukzip.sh
             ./deploy_ssukzip.sh
 
 
