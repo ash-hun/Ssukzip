@@ -1,9 +1,6 @@
 from konlpy.tag import Okt
-from tensorflow.keras import models
-from tensorflow.keras import layers
-from tensorflow.keras import optimizers
-from tensorflow.keras import losses
-from tensorflow.keras import metrics
+from tensorflow.keras import models, layers, optimizers, losses, metrics
+import matplotlib.pyplot as plt
 import numpy as np
 import json
 import os
@@ -12,8 +9,7 @@ import nltk
 def read_data(filename):
     with open(filename, 'r', encoding='utf-8') as f:
         data = [line.split('\t') for line in f.read().splitlines()]
-        # txt 파일의 헤더(id document label)는 제외하기
-        data = data[1:]
+        data = data[1:] # txt 파일의 헤더(id document label)는 제외하기
     return data
 
 def tokenize(doc):
@@ -21,6 +17,12 @@ def tokenize(doc):
     return ['/'.join(t) for t in Okt().pos(doc, norm=True, stem=True)]
 
 def term_frequency(doc):
+    with open('train_docs.json', encoding="utf-8") as f:
+        train_docs = json.load(f)
+    
+    tokens = [t for d in train_docs for t in d[0]]
+    text = nltk.Text(tokens, name='NMSC')
+    selected_words = [f[0] for f in text.vocab().most_common(10000)]
     return [doc.count(word) for word in selected_words]
 
 def predict_pos_neg(model, review):
@@ -28,10 +30,12 @@ def predict_pos_neg(model, review):
     tf = term_frequency(token)
     data = np.expand_dims(np.asarray(tf).astype('float32'), axis=0)
     score = float(model.predict(data))
+    # print(f"token : {token} / tf : {tf} / data : {data} / pred_score : {score}")
     if(score > 0.5):
         print("[{}]는 {:.2f}% 확률로 긍정 리뷰이지 않을까 추측해봅니다.^^\n".format(review, score * 100))
     else:
         print("[{}]는 {:.2f}% 확률로 부정 리뷰이지 않을까 추측해봅니다.^^;\n".format(review, (1 - score) * 100))
+    return score
 
 if __name__=="__main__":
     train_data = read_data('ratings_train.txt')
@@ -74,10 +78,21 @@ if __name__=="__main__":
     model.add(layers.Dense(64, activation='relu'))
     model.add(layers.Dense(1, activation='sigmoid'))
 
-    model.compile(optimizer=optimizers.RMSprop(lr=0.001),
+    model.compile(optimizer=optimizers.RMSprop(lr=0.005),
                   loss=losses.binary_crossentropy,
                   metrics=[metrics.binary_accuracy])
 
-    model.fit(x_train, y_train, epochs=10, batch_size=512)
+    history = model.fit(x_train, y_train, epochs=10, batch_size=512)
+    print(history.history)
+    
+    plt.plot(history.history['binary_accuracy'])
+    plt.plot(history.history['loss'])
+    plt.title("Model Accuracy")
+    plt.xlabel('Epoch')
+    plt.ylabel('Value')
+    plt.legend(['binary_accuracy', 'loss'], loc='upper left')
+    plt.show()
+
     results = model.evaluate(x_test, y_test)
+    print(f"model : {model.summary()}")
     model.save("ssukzip_Model.h5")
