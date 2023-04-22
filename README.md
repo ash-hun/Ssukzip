@@ -18,8 +18,9 @@
   <img src="https://img.shields.io/badge/ Tensorflow v2.5.0-FF6F00?style=flat&logo=tensorflow&logoColor=ffffff">
 </div>
 
+<!--- 
 ## 🔥 Ssukzip **[Go!](https://url.kr/htozj7)**
-
+--->
 
 ## 👊 Preview  
 
@@ -30,12 +31,13 @@
   </a>
 </div>
 
+<!--- 
 
 ## 📑 Docs
 [입맛이 까다로운 사람들을 위한 맛집 - 썩집](https://topaz-joke-66e.notion.site/0bc09ef214404394b3ffba812c2d22b4)  
 
 
-<!--- 
+
 ## 📅 Schedule
 [**👉 프로젝트 일정**](https://topaz-joke-66e.notion.site/32d0a4726f7c4c5ab2c5463326492c15)  
 
