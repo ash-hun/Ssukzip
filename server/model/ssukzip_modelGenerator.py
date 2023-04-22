@@ -1,5 +1,6 @@
 from konlpy.tag import Okt
 from tensorflow.keras import models, layers, optimizers, losses, metrics
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import numpy as np
 import json
@@ -66,7 +67,7 @@ if __name__=="__main__":
     test_x = [term_frequency(d) for d, _ in test_docs]
     train_y = [c for _, c in train_docs]
     test_y = [c for _, c in test_docs]
-
+    
     x_train = np.asarray(train_x).astype('float32')
     x_test = np.asarray(test_x).astype('float32')
 
@@ -78,9 +79,9 @@ if __name__=="__main__":
     model.add(layers.Dense(64, activation='relu'))
     model.add(layers.Dense(1, activation='sigmoid'))
 
-    model.compile(optimizer=optimizers.RMSprop(lr=0.005),
+    model.compile(optimizer=optimizers.RMSprop(lr=0.002),
                   loss=losses.binary_crossentropy,
-                  metrics=[metrics.binary_accuracy])
+                  metrics=[metrics.accuracy])
 
     history = model.fit(x_train, y_train, epochs=10, batch_size=512)
     print(history.history)
